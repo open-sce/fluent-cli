@@ -10,7 +10,7 @@ Domino Data Lab Fluent CLI (Command Line Interface) is a client used provision a
 
 To use this CLI you will need the following:
 
-- JDK 11+
+- JDK 11+ (only if using JVM version)
 - Domino API Key to an active Domino instance
 
 # Build
