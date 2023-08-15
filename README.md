@@ -1,8 +1,7 @@
 # Domino Data Lab Command Line Interface
-</div>
-<br>
 
-[![License: GPL 3.0](https://img.shields.io/badge/License-GPL3-red.svg)](https://opensource.org/license/gpl-3-0/)
+[![License: GPL 3.0](https://img.shields.io/badge/License-GPL3-red.svg&style=for-the-badge)](https://opensource.org/license/gpl-3-0/)
+[![Quarkus](https://img.shields.io/badge/quarkus-power-blue?logo=quarkus&style=for-the-badge)](https://github.com/quarkusio/quarkus)
 
 
 Domino Data Lab Command Line Interface is a client used provision and control Domino.
@@ -117,9 +116,9 @@ $ java -jar ./target/domino-cli.jar -k YOUR_KEY -u https://domino.yourcompany.co
 
 # Releasing
 
-- Run `mvn versions:set -DgenerateBackupPoms=false -DnewVersion=5.5.1` to update all modules versions
+- Run `mvn versions:set -DgenerateBackupPoms=false -DnewVersion=2.0.0` to update all modules versions
 - Commit and push the changes to GitHub
-- In GitHub create a new Release titled `5.5.1` to tag this release
+- In GitHub create a new Release titled `2.0.0` to tag this release
 - Run `mvn clean deploy -Prelease` to push to Maven Central
 
 # License
