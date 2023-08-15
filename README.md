@@ -2,6 +2,7 @@
 
 [![License: GPL 3.0](https://img.shields.io/badge/License-GPL3-red.svg?style=for-the-badge)](https://opensource.org/license/gpl-3-0/)
 [![Quarkus](https://img.shields.io/badge/quarkus-power-blue?logo=quarkus&style=for-the-badge)](https://github.com/quarkusio/quarkus)
+[![CI](https://img.shields.io/github/actions/workflow/status/open-sce/fluent-cli/build.yml?branch=main&logo=GitHub&style=for-the-badge)](https://github.com/open-sce/fluent-cli/actions/workflows/build.yml)
 
 
 Domino Data Lab Fluent CLI (Command Line Interface) is a client used provision and control Domino.
