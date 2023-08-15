@@ -8,7 +8,7 @@
 Domino Data Lab Fluent CLI (Command Line Interface) is a client used provision and control Domino.
 
 # Features
--   Ability to output results as text, JSON, or XML
+-   Ability to output results as plain text, JSON, or XML
 -   Zero dependency native executable
 -   Detailed context sensitive help for each command
 -   Easily [script and chain](https://raw.githubusercontent.com/open-sce/fluent-cli/main/demo/demo.sh) commands together in your favorite shell (Bash, PowerShell, etc)
