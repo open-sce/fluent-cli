@@ -1,10 +1,10 @@
-# Domino Data Lab Command Line Interface
+# Domino Data Lab Fluent CLI
 
 [![License: GPL 3.0](https://img.shields.io/badge/License-GPL3-red.svg?style=for-the-badge)](https://opensource.org/license/gpl-3-0/)
 [![Quarkus](https://img.shields.io/badge/quarkus-power-blue?logo=quarkus&style=for-the-badge)](https://github.com/quarkusio/quarkus)
 
 
-Domino Data Lab Command Line Interface is a client used provision and control Domino.
+Domino Data Lab Fluent CLI (Command Line Interface) is a client used provision and control Domino.
 
 # Requirements
 
