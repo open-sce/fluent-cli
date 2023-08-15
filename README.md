@@ -15,7 +15,9 @@ To use this CLI you will need the following:
 
 # Build
 
-To build the project requires Apache Maven:
+To build the project requires Apache Maven.  You can build as a JAR file which requires a JVM to run, or as a native executable which requires nothing else to run.
+
+## JVM Build
 
 ```shell
 $ mvn clean package
@@ -37,6 +39,30 @@ Copyright 2023, OpenSCE Collaborative
 Java OpenJDK Runtime Environment 11.0.18+10 Oracle Corporation
 OS Windows 10 10.0 amd64
 ```
+
+## Native Executable Build
+
+Quarkus has excellent [instructions for building native executables](https://quarkus.io/guides/building-native-image).
+
+### Linux
+
+For Linux follow the [instructions for building native executables](https://quarkus.io/guides/building-native-image) which may require you to installed GraalVM.  
+Once you have everything installed you can build a Linux native executable with:
+
+```shell
+mvn clean package -Pnative
+```
+
+### Windows
+
+To build a native executable on Windows will require you install the [Visual Studio 2017 Visual C++ Build Tools](https://aka.ms/vs/15/release/vs_buildtools.exe) or if you already have full Visual Studio installed.
+Once you have everything installed you can build a Windows native executable with:
+
+```shell
+mvn clean package -Pnative
+```
+
+You will find the fully portable executable in `/target/domino-cli-2.0.0.exe` which you can rename and move to any other windows machine.
 
 # Domino Settings
 
