@@ -1,17 +1,9 @@
-<div align="center">
-    <div style="flex-grow: 1; width: 50vw"> 
-<a href="https://www.dominodatalab.com/" alt="Domino Data Lab">
-   <img class="spinner" loading="lazy" height="80" width="116" src="https://www.dominodatalab.com/hubfs/NBM/domino-logo-spinner.webp" alt="Domino Data Logo - Graphic part">
-   <img loading="lazy" height="80" src="https://www.dominodatalab.com/hubfs/NBM/domino-logo-text.webp" alt="Domino Data Logo - Text part">
-</a>
-    </div>
- 
 # Domino Data Lab Command Line Interface
 </div>
 <br>
 
 [![License: GPL 3.0](https://img.shields.io/badge/License-GPL3-red.svg)](https://opensource.org/license/gpl-3-0/)
-[![CI](https://github.com/open-sce/fluent-cli/actions/workflows/build.yml/badge.svg)](https://github.com/open-sce/fluent-cli/actions/workflows/build.yml)
+
 
 Domino Data Lab Command Line Interface is a client used provision and control Domino.
 
