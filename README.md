@@ -1,6 +1,6 @@
 # Domino Data Lab Command Line Interface
 
-[![License: GPL 3.0](https://img.shields.io/badge/License-GPL3-red.svg&style=for-the-badge)](https://opensource.org/license/gpl-3-0/)
+[![License: GPL 3.0](https://img.shields.io/badge/License-GPL3-red.svg?style=for-the-badge)](https://opensource.org/license/gpl-3-0/)
 [![Quarkus](https://img.shields.io/badge/quarkus-power-blue?logo=quarkus&style=for-the-badge)](https://github.com/quarkusio/quarkus)
 
 
