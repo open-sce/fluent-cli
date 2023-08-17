@@ -5,14 +5,14 @@ changelog:
         - breaking-change
     - title: New Features & Enhancements 🎉
       labels:
-        - "new feature"
+        - new-feature
         - enhancement
     - title: Accessibility ♿
       labels:
         - accessibility
     - title: Defects 🐞
       labels:
-        - ":lady_beetle: defect"
+        - "bug"
     - title: Dependencies 👒 
       labels:
         - dependencies
