@@ -64,7 +64,7 @@
         <dependency>
             <groupId>com.ksmpartners</groupId>
             <artifactId>quarkus-domino-client</artifactId>
-            <version>5.5.1</version>
+            <version>5.7.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
