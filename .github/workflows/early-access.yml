@@ -73,10 +73,10 @@ jobs:
           restore-keys: ${{ runner.os }}-maven-
 
       - name: 'Build Native Image'
-        run: ./mvnw -B -ntp --file pom.xml -Pnative package
+        run: mvn -B -ntp --file pom.xml -Pnative package
 
       - name: 'Create distribution'
-        run: ./mvnw -B -ntp --file pom.xml -Pdist package -DskipTests
+        run: mvn -B -ntp --file pom.xml -Pdist package -DskipTests
 
       - name: 'Upload build artifact'
         uses: actions/upload-artifact@v3
@@ -115,4 +115,4 @@ jobs:
       - name: 'Release with JReleaser'
         env:
           JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./mvnw -B -ntp --file pom.xml -Prelease -DartifactsDir=artifacts jreleaser:full-release
+        run: mvn -B -ntp --file pom.xml -Prelease -DartifactsDir=artifacts jreleaser:full-release
