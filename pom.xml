@@ -340,13 +340,6 @@
                         <groupId>org.jreleaser</groupId>
                         <artifactId>jreleaser-maven-plugin</artifactId>
                         <version>1.7.0</version>
-                        <dependencies>
-                            <dependency>
-                                <groupId>commons-io</groupId>
-                                <artifactId>commons-io</artifactId>
-                                <version>2.13.0</version>
-                            </dependency>
-                        </dependencies>
                         <configuration>
                             <jreleaser>
                                 <release>
@@ -370,7 +363,7 @@
                                 </release>
                                 <distributions>
                                     <domino-cli>
-                                        <type>NATIVE_IMAGE</type>
+                                        <type>BINARY</type>
                                         <artifacts>
                                             <artifact>
                                                 <path>{{artifactsDir}}/{{distributionName}}-{{projectVersion}}-linux-x86_64.tar.gz</path>
