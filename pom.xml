@@ -338,7 +338,7 @@
                     <plugin>
                         <groupId>org.jreleaser</groupId>
                         <artifactId>jreleaser-maven-plugin</artifactId>
-                        <version>${jreleaser-plugin.version}</version>
+                        <version>1.7.0</version>
                         <dependencies>
                             <dependency>
                                 <groupId>commons-io</groupId>
