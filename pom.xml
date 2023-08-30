@@ -17,6 +17,7 @@
         <executable-suffix/>
         <artifactsDir>target/distributions</artifactsDir>
     </properties>
+    <inceptionYear>2023</inceptionYear>
     <licenses>
         <license>
             <name>MIT License</name>
