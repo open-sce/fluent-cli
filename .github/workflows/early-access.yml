@@ -90,6 +90,8 @@ jobs:
   release:
     needs: [ build ]
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
       - name: 'Check out repository'
         uses: actions/checkout@v4
@@ -114,5 +116,5 @@ jobs:
 
       - name: 'Release with JReleaser'
         env:
-          JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          #JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mvn -B -ntp --file pom.xml -Prelease -DartifactsDir=artifacts jreleaser:full-release
