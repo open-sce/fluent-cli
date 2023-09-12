@@ -90,8 +90,7 @@ jobs:
   release:
     needs: [ build ]
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
+    permissions: write-all
     steps:
       - name: 'Check out repository'
         uses: actions/checkout@v4
