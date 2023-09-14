@@ -15,61 +15,11 @@ Domino Data Lab Fluent CLI (Command Line Interface) is a client used provision a
 
 # Requirements
 
-To use this CLI you will need the following:
+To use this CLI you will need to download the binary for your operating system such as Windows, Linux, or MacOS.  We provide pre-built binaries that have no other requirements found
+on our [Releases](https://github.com/open-sce/fluent-cli/releases) page.
 
-- JDK 11+ _(only if using JVM version)_
+- Binary for your OS found here: https://github.com/open-sce/fluent-cli/releases
 - Domino API Key to an active Domino instance
-
-# Build
-
-To build the project requires Apache Maven.  You can build as a JAR file which requires a JVM to run, or as a native executable which requires nothing else to run.
-
-## JVM Build
-
-```shell
-$ mvn clean package
-```
-
-To test the CLI:
-
-```shell
-$ java -jar ./target/domino-cli.jar --version
-
-    ___                _
-   /   \___  _ __ ___ (_)_ __   ___
-  / /\ / _ \| '_ ` _ \| | '_ \ / _ \
- / /_// (_) | | | | | | | | | | (_) |
-/___,' \___/|_| |_| |_|_|_| |_|\___/
-
-Domino CLI 2.0.0-SNAPSHOT
-Copyright 2023, OpenSCE Collaborative
-Java OpenJDK Runtime Environment 11.0.18+10 Oracle Corporation
-OS Windows 10 10.0 amd64
-```
-
-## Native Executable Build
-
-Quarkus has excellent [instructions for building native executables](https://quarkus.io/guides/building-native-image).
-
-### Linux
-
-For Linux follow the [instructions for building native executables](https://quarkus.io/guides/building-native-image) which may require you to installed GraalVM.  
-Once you have everything installed you can build a Linux native executable with:
-
-```shell
-mvn clean package -Pnative
-```
-
-### Windows
-
-To build a native executable on Windows will require you install the [Visual Studio 2017 Visual C++ Build Tools](https://aka.ms/vs/15/release/vs_buildtools.exe) or if you already have full Visual Studio installed.
-Once you have everything installed you can build a Windows native executable with:
-
-```shell
-mvn clean package -Pnative
-```
-
-You will find the fully portable executable in `/target/domino-cli-2.0.0.exe` which you can rename and move to any other windows machine.
 
 # Domino Settings
 
@@ -123,13 +73,13 @@ Replace `"your_api_key"` and `"your_api_url"` with the actual values you want to
 To test the CLI is working, run the following command to print out your current user information:
 
 ```shell
-$ java -jar ./target/domino-cli.jar user current
+$ domino-cli user current
 ```
 
 If you are not using environment variables it would be:
 
 ```shell
-$ java -jar ./target/domino-cli.jar -k YOUR_KEY -u https://domino.yourcompany.com/v4 user current
+$ domino-cli -k YOUR_KEY -u https://domino.yourcompany.com/v4 user current
 ```
 
 **Output:**
@@ -147,12 +97,62 @@ $ java -jar ./target/domino-cli.jar -k YOUR_KEY -u https://domino.yourcompany.co
 # Help
 ![image](https://user-images.githubusercontent.com/4399574/155019857-986e31e4-abc0-4eda-9e96-3ed39c746119.png)
 
+# Build
+
+To build the project requires Apache Maven.  You can build as a JAR file which requires a JVM to run, or as a native executable which requires nothing else to run.
+
+## JVM Build
+
+```shell
+$ mvn clean package
+```
+
+To test the CLI:
+
+```shell
+$ java -jar ./target/domino-cli.jar --version
+
+    ___                _
+   /   \___  _ __ ___ (_)_ __   ___
+  / /\ / _ \| '_ ` _ \| | '_ \ / _ \
+ / /_// (_) | | | | | | | | | | (_) |
+/___,' \___/|_| |_| |_|_|_| |_|\___/
+
+Domino CLI 2.0.0-SNAPSHOT
+Copyright 2023, OpenSCE Collaborative
+Java OpenJDK Runtime Environment 11.0.18+10 Oracle Corporation
+OS Windows 10 10.0 amd64
+```
+
+## Native Executable Build
+
+Quarkus has excellent [instructions for building native executables](https://quarkus.io/guides/building-native-image).
+
+### Linux
+
+For Linux follow the [instructions for building native executables](https://quarkus.io/guides/building-native-image) which may require you to installed GraalVM.  
+Once you have everything installed you can build a Linux native executable with:
+
+```shell
+mvn clean package -Pnative
+```
+
+### Windows
+
+To build a native executable on Windows will require you install the [Visual Studio 2017 Visual C++ Build Tools](https://aka.ms/vs/15/release/vs_buildtools.exe) or if you already have full Visual Studio installed.
+Once you have everything installed you can build a Windows native executable with:
+
+```shell
+mvn clean package -Pnative
+```
+
+You will find the fully portable executable in `/target/domino-cli-2.0.0.exe` which you can rename and move to any other windows machine.
+
 # Releasing
 
-- Run `mvn versions:set -DgenerateBackupPoms=false -DnewVersion=2.0.0` to update all modules versions
-- Commit and push the changes to GitHub
-- In GitHub create a new Release titled `2.0.0` to tag this release
-- Run `mvn clean deploy -Prelease` to push to Maven Central
+- Click on GitHub Actions
+- Find the Release action and execute the action manually
+- It will ask for Release version and next SNAPSHOT version.  Simply fill out and it is all automated!
 
 # License
 
