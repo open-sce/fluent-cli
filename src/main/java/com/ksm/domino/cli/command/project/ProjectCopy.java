@@ -61,14 +61,14 @@ public class ProjectCopy extends AbstractDominoCommand {
         DominoProjectsApiCopyGitRequest gitObject = new DominoProjectsApiCopyGitRequest();
         gitObject.setCredentialId(credentialId);
         gitObject.setImportedGitReposCredentialId(importedCredentialId);
-        
+
         // - enforce link xor new repo
         if (linkRepoUrl.isPresent() && repoName.isEmpty() && repoOwner.isEmpty()) {
             gitObject.setLinkSpec(new DominoProjectsApiLinkedGitRepoMetadata().uri(linkRepoUrl.get()));
         } else if (repoName.isPresent()) {
             Validate.notBlank(repoOwner.orElse(null), "Parameter 'repoOwner' is required if 'repoName' is specified");
             DominoProjectsApiCopiedGitRepoMetadata copySpec = new DominoProjectsApiCopiedGitRepoMetadata();
-            copySpec.setIsPrivate(true);
+            copySpec.setVisibility(DominoProjectsApiCopiedGitRepoMetadata.VisibilityEnum.PRIVATE);
             copySpec.setRepoName(repoName.get());
             copySpec.setOwnerName(repoOwner.get());
             gitObject.setCopySpec(copySpec);
