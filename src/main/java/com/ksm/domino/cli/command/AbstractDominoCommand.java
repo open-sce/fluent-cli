@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-import org.openapitools.jackson.nullable.JsonNullableModule;
 
 import com.dominodatalab.api.invoker.ApiClient;
 import com.dominodatalab.api.invoker.ApiException;
@@ -120,7 +119,6 @@ public abstract class AbstractDominoCommand implements Runnable {
         mapper.enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING);
         mapper.disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE);
         mapper.registerModule(new JavaTimeModule());
-        mapper.registerModule(new JsonNullableModule());
         String result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(o);
         System.out.println(result);
     }
