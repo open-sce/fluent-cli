@@ -18,10 +18,10 @@ public class JobGet extends AbstractDominoCommand {
 
     private static final String NAME = "job get";
 
-    @CommandLine.Parameters(description = "@|blue Required parameters:%n jobId=12345%n|@%n", mapFallbackValue = "")
-    private final Map<String, String> parameters = new LinkedHashMap<>(3);
+//    @CommandLine.Parameters(description = "@|blue Required parameters:%n jobId=12345%n|@%n", mapFallbackValue = "")
+//    private final Map<String, String> parameters = new LinkedHashMap<>(3);
 
-    @CommandLine.Parameters(description = "Job Id to get", paramLabel = "jobId", arity = "1")
+    @CommandLine.Parameters(description = "Job Id to get%n", paramLabel = "jobId")
     private String alternateJobId;
 
     @Override
