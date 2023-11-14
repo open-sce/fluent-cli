@@ -21,12 +21,15 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.ksm.domino.cli.Domino;
 
+import picocli.CommandLine;
 import picocli.CommandLine.Option;
 
 /**
  * Abstract base class that any command that needs to access Domino should extend.
  */
 public abstract class AbstractDominoCommand implements Runnable {
+    @CommandLine.Spec
+    CommandLine.Model.CommandSpec spec;
 
     /**
      * Default target path of the Domino API
@@ -47,14 +50,14 @@ public abstract class AbstractDominoCommand implements Runnable {
     public void run() {
         try {
             execute();
-        }
-        catch (ApiException ex) {
+        } catch (ApiException ex) {
             throw new RuntimeException(ex.getMessage());
-        }
-        catch (IllegalArgumentException ex) {
-            throw ex;
-        }
-        catch (Exception ex) {
+        } catch (IllegalArgumentException ex) {
+            System.out.println(ex.getMessage());
+            // if the command was invoked without proper params, show the usage help
+            spec.commandLine().usage(System.err);
+        } catch (Exception ex) {
+            System.out.println("so this is the issue");
             throw new RuntimeException(ex);
         }
     }
@@ -83,7 +86,7 @@ public abstract class AbstractDominoCommand implements Runnable {
     /**
      * Output this result to the console.
      *
-     * @param o object to output to console
+     * @param o      object to output to console
      * @param domino the root Domino command, required for its common options
      * @throws JsonProcessingException if any error occurs
      */
@@ -125,8 +128,13 @@ public abstract class AbstractDominoCommand implements Runnable {
 
     public String getRequiredParam(Map<String, String> parameters, String parameterName, String command) {
         String param = parameters.get(parameterName);
-        Validate.notBlank(param,
+        try {
+            Validate.notBlank(param,
                     String.format("Missing the required parameter '%s' when calling '%s'.", parameterName, command));
+        } catch (Exception e) {
+            throw new IllegalArgumentException(
+                    String.format("Missing the required parameter '%s' when calling '%s'.", parameterName, command), e);
+        }
         return param;
     }
 }

@@ -28,38 +28,38 @@ import picocli.CommandLine;
 
 @TopCommand
 @Command(name = "domino",
-            header = "%n@|green Domino CLI|@",
-            description = "%n@|blue Domino Data Lab Command Line Interface is a client to used provision and control Domino.|@%n",
-            mixinStandardHelpOptions = true,
-            versionProvider = VersionProvider.class,
-            defaultValueProvider = EnvironmentVariableDefaultProvider.class,
-            subcommands = {
-                        Collaborator.class,
-                        Dataset.class,
-                        DataSource.class,
-                        Goal.class,
-                        Job.class,
-                        User.class,
-                        Project.class,
-                        Run.class,
-                        Server.class
-            })
+        header = "%n@|green Domino CLI|@",
+        description = "%n@|blue Domino Data Lab Command Line Interface is a client to used provision and control Domino.|@%n",
+        mixinStandardHelpOptions = true,
+        versionProvider = VersionProvider.class,
+        defaultValueProvider = EnvironmentVariableDefaultProvider.class,
+        subcommands = {
+                Collaborator.class,
+                Dataset.class,
+                DataSource.class,
+                Goal.class,
+                Job.class,
+                User.class,
+                Project.class,
+                Run.class,
+                Server.class
+        })
 public class Domino implements Runnable {
 
     @Option(names = {"-k",
-                "--key"}, description = "Domino API Key.", defaultValue = "DOMINO_API_KEY", scope = ScopeType.INHERIT)
+            "--key"}, description = "Domino API Key.", defaultValue = "DOMINO_API_KEY", scope = ScopeType.INHERIT)
     public String apiKey;
 
     @Option(names = {"-u",
-                "--url"}, description = "Domino API URL.", defaultValue = "DOMINO_API_URL", scope = ScopeType.INHERIT)
+            "--url"}, description = "Domino API URL.", defaultValue = "DOMINO_API_URL", scope = ScopeType.INHERIT)
     public String apiUrl;
 
     @Option(names = {"-t",
-                "--timeout"}, description = "Timeout in seconds waiting for Domino responses.", defaultValue = "60", scope = ScopeType.INHERIT)
+            "--timeout"}, description = "Timeout in seconds waiting for Domino responses.", defaultValue = "60", scope = ScopeType.INHERIT)
     public long timeoutSeconds;
 
     @Option(names = {"-o",
-                "--output"}, description = "Output format TEXT, JSON, XML", defaultValue = "JSON", scope = ScopeType.INHERIT)
+            "--output"}, description = "Output format TEXT, JSON, XML", defaultValue = "JSON", scope = ScopeType.INHERIT)
     public OutputFormat outputFormat;
 
     @Spec
