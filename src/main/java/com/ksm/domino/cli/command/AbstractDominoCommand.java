@@ -51,13 +51,14 @@ public abstract class AbstractDominoCommand implements Runnable {
         } catch (ApiException ex) {
             throw new RuntimeException(ex.getMessage());
         } catch (IllegalArgumentException ex) {
-            // color the message so it stands out
-            String BRIGHT_RED_TEXT = "\033[0;91m";
-            String RESET_TEXT_COLOR = "\033[0m";
-            System.err.println(BRIGHT_RED_TEXT + ex.getMessage() + RESET_TEXT_COLOR);
-
-            // if the command was invoked without proper params, show the usage help
-            spec.commandLine().usage(System.err);
+//            // color the message so it stands out
+//            String BRIGHT_RED_TEXT = "\033[0;91m";
+//            String RESET_TEXT_COLOR = "\033[0m";
+//            System.err.println(BRIGHT_RED_TEXT + ex.getMessage() + RESET_TEXT_COLOR);
+//
+//            // if the command was invoked without proper params, show the usage help
+//            spec.commandLine().usage(System.err);
+            throw ex;
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
@@ -129,13 +130,13 @@ public abstract class AbstractDominoCommand implements Runnable {
 
     public String getRequiredParam(Map<String, String> parameters, String parameterName, String command) {
         String param = parameters.get(parameterName);
-        try {
+//        try {
             Validate.notBlank(param,
                     String.format("Missing the required parameter '%s' when calling '%s'.", parameterName, command));
-        } catch (Exception e) {
-            throw new IllegalArgumentException(
-                    String.format("Missing the required parameter '%s' when calling '%s'.", parameterName, command), e);
-        }
+//        } catch (Exception e) {
+//            throw new IllegalArgumentException(
+//                    String.format("Missing the required parameter '%s' when calling '%s'.", parameterName, command), e);
+//        }
         return param;
     }
 }

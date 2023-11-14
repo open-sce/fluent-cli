@@ -21,11 +21,19 @@ public class JobGet extends AbstractDominoCommand {
     @CommandLine.Parameters(description = "@|blue Required parameters:%n jobId=12345%n|@%n", mapFallbackValue = "")
     private final Map<String, String> parameters = new LinkedHashMap<>(3);
 
+    @CommandLine.Parameters(description = "Job Id to get", paramLabel = "jobId", arity = "1")
+    private String alternateJobId;
+
     @Override
     public void execute() throws Exception {
-        String jobId = getRequiredParam(parameters, "jobId", NAME);
+//        System.out.printf("jobId a different way: %s\n", alternateJobId);
+//        if(extraParams != null){
+//            System.out.printf("the extra param is: %s\n", extraParams);
+//        }
+
+//        String jobId = getRequiredParam(parameters, "jobId", NAME);
         JobsApi api = new JobsApi(getApiClient(parent.domino));
-        DominoJobsInterfaceJob job = api.getJob(jobId);
+        DominoJobsInterfaceJob job = api.getJob(alternateJobId);
         output(job, parent.domino);
     }
 }
