@@ -1,13 +1,5 @@
 package com.ksm.domino.cli.command;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.time.Duration;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
-
 import com.dominodatalab.api.invoker.ApiClient;
 import com.dominodatalab.api.invoker.ApiException;
 import com.dominodatalab.client.TrustAllManager;
@@ -20,9 +12,15 @@ import com.fasterxml.jackson.dataformat.toml.TomlMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.ksm.domino.cli.Domino;
-
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
+
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.time.Duration;
+import java.util.Map;
 
 /**
  * Abstract base class that any command that needs to access Domino should extend.
@@ -53,11 +51,14 @@ public abstract class AbstractDominoCommand implements Runnable {
         } catch (ApiException ex) {
             throw new RuntimeException(ex.getMessage());
         } catch (IllegalArgumentException ex) {
-            System.out.println(ex.getMessage());
+            // color the message so it stands out
+            String BRIGHT_RED_TEXT = "\033[0;91m";
+            String RESET_TEXT_COLOR = "\033[0m";
+            System.err.println(BRIGHT_RED_TEXT + ex.getMessage() + RESET_TEXT_COLOR);
+
             // if the command was invoked without proper params, show the usage help
             spec.commandLine().usage(System.err);
         } catch (Exception ex) {
-            System.out.println("so this is the issue");
             throw new RuntimeException(ex);
         }
     }
