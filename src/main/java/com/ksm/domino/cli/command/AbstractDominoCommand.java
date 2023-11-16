@@ -122,8 +122,6 @@ public abstract class AbstractDominoCommand implements Runnable {
             Validate.notBlank(param,
                     String.format("Missing the required parameter '%s' when calling '%s'.", parameterName, command));
         } catch (Exception e) {
-            // this will catch either NullPointerException or IllegalArgumentException from above
-            // throwing an Illegal argument exception shows the help menu automatically
             throw new IllegalArgumentException(e.getMessage());
         }
         return param;
