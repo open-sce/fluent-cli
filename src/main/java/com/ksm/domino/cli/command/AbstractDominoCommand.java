@@ -14,7 +14,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.ksm.domino.cli.Domino;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-import picocli.CommandLine;
 import picocli.CommandLine.Option;
 
 import java.net.URI;
@@ -26,9 +25,6 @@ import java.util.Map;
  * Abstract base class that any command that needs to access Domino should extend.
  */
 public abstract class AbstractDominoCommand implements Runnable {
-    @CommandLine.Spec
-    CommandLine.Model.CommandSpec spec;
-
     /**
      * Default target path of the Domino API
      */
@@ -51,13 +47,6 @@ public abstract class AbstractDominoCommand implements Runnable {
         } catch (ApiException ex) {
             throw new RuntimeException(ex.getMessage());
         } catch (IllegalArgumentException ex) {
-//            // color the message so it stands out
-//            String BRIGHT_RED_TEXT = "\033[0;91m";
-//            String RESET_TEXT_COLOR = "\033[0m";
-//            System.err.println(BRIGHT_RED_TEXT + ex.getMessage() + RESET_TEXT_COLOR);
-//
-//            // if the command was invoked without proper params, show the usage help
-//            spec.commandLine().usage(System.err);
             throw ex;
         } catch (Exception ex) {
             throw new RuntimeException(ex);
@@ -82,7 +71,6 @@ public abstract class AbstractDominoCommand implements Runnable {
             client.setBasePath(DEFAULT_DOMINO_API_BASE_PATH);
         }
         return client;
-
     }
 
     /**
@@ -130,13 +118,14 @@ public abstract class AbstractDominoCommand implements Runnable {
 
     public String getRequiredParam(Map<String, String> parameters, String parameterName, String command) {
         String param = parameters.get(parameterName);
-//        try {
+        try {
             Validate.notBlank(param,
                     String.format("Missing the required parameter '%s' when calling '%s'.", parameterName, command));
-//        } catch (Exception e) {
-//            throw new IllegalArgumentException(
-//                    String.format("Missing the required parameter '%s' when calling '%s'.", parameterName, command), e);
-//        }
+        } catch (Exception e) {
+            // this will catch either NullPointerException or IllegalArgumentException from above
+            // throwing an Illegal argument exception shows the help menu automatically
+            throw new IllegalArgumentException(e.getMessage());
+        }
         return param;
     }
 }
