@@ -1,13 +1,5 @@
 package com.ksm.domino.cli.command;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.time.Duration;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
-
 import com.dominodatalab.api.invoker.ApiClient;
 import com.dominodatalab.api.invoker.ApiException;
 import com.dominodatalab.client.TrustAllManager;
@@ -20,14 +12,18 @@ import com.fasterxml.jackson.dataformat.toml.TomlMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.ksm.domino.cli.Domino;
-
+import org.apache.commons.lang3.StringUtils;
 import picocli.CommandLine.Option;
+
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.time.Duration;
+import java.util.Map;
 
 /**
  * Abstract base class that any command that needs to access Domino should extend.
  */
 public abstract class AbstractDominoCommand implements Runnable {
-
     /**
      * Default target path of the Domino API
      */
@@ -47,14 +43,11 @@ public abstract class AbstractDominoCommand implements Runnable {
     public void run() {
         try {
             execute();
-        }
-        catch (ApiException ex) {
+        } catch (ApiException ex) {
             throw new RuntimeException(ex.getMessage());
-        }
-        catch (IllegalArgumentException ex) {
+        } catch (IllegalArgumentException ex) {
             throw ex;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -77,13 +70,12 @@ public abstract class AbstractDominoCommand implements Runnable {
             client.setBasePath(DEFAULT_DOMINO_API_BASE_PATH);
         }
         return client;
-
     }
 
     /**
      * Output this result to the console.
      *
-     * @param o object to output to console
+     * @param o      object to output to console
      * @param domino the root Domino command, required for its common options
      * @throws JsonProcessingException if any error occurs
      */
@@ -125,8 +117,10 @@ public abstract class AbstractDominoCommand implements Runnable {
 
     public String getRequiredParam(Map<String, String> parameters, String parameterName, String command) {
         String param = parameters.get(parameterName);
-        Validate.notBlank(param,
+        if (StringUtils.isBlank(param)) {
+            throw new IllegalArgumentException(
                     String.format("Missing the required parameter '%s' when calling '%s'.", parameterName, command));
+        }
         return param;
     }
 }

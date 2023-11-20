@@ -19,7 +19,7 @@ public class RunList extends AbstractDominoCommand {
 
     private static final String NAME = "run list";
 
-    @CommandLine.Parameters(description = "@|blue Optional parameters:%n userId=hsimpson%n|@%n", mapFallbackValue = "")
+    @CommandLine.Parameters(description = "@|blue Required parameters:%n userId=hsimpson%n|@%n", mapFallbackValue = "")
     private final Map<String, String> parameters = new LinkedHashMap<>(3);
 
     @Override
