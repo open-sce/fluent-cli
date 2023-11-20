@@ -13,7 +13,6 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.ksm.domino.cli.Domino;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import picocli.CommandLine.Option;
 
 import java.net.URI;
@@ -118,11 +117,9 @@ public abstract class AbstractDominoCommand implements Runnable {
 
     public String getRequiredParam(Map<String, String> parameters, String parameterName, String command) {
         String param = parameters.get(parameterName);
-        try {
-            Validate.notBlank(param,
+        if (StringUtils.isBlank(param)) {
+            throw new IllegalArgumentException(
                     String.format("Missing the required parameter '%s' when calling '%s'.", parameterName, command));
-        } catch (Exception e) {
-            throw new IllegalArgumentException(e.getMessage());
         }
         return param;
     }
