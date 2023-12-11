@@ -1,12 +1,8 @@
 package com.ksm.domino.cli.command.job;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import com.dominodatalab.api.model.DominoJobsInterfaceJob;
 import com.dominodatalab.api.rest.JobsApi;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
-
 import picocli.CommandLine;
 import picocli.CommandLine.ParentCommand;
 
@@ -18,12 +14,11 @@ public class JobGet extends AbstractDominoCommand {
 
     private static final String NAME = "job get";
 
-    @CommandLine.Parameters(description = "@|blue Required parameters:%n jobId=12345%n|@%n", mapFallbackValue = "")
-    private final Map<String, String> parameters = new LinkedHashMap<>(3);
+    @CommandLine.Option(names = {"--jobId"}, description = "Job ID to get", required = true)
+    private String jobId;
 
     @Override
     public void execute() throws Exception {
-        String jobId = getRequiredParam(parameters, "jobId", NAME);
         JobsApi api = new JobsApi(getApiClient(parent.domino));
         DominoJobsInterfaceJob job = api.getJob(jobId);
         output(job, parent.domino);
