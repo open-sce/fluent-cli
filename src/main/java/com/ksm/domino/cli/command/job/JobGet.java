@@ -6,7 +6,7 @@ import com.ksm.domino.cli.command.AbstractDominoCommand;
 import picocli.CommandLine;
 import picocli.CommandLine.ParentCommand;
 
-@CommandLine.Command(name = "get", header = "%n@|green Retrieves a single job by job id.|@")
+@CommandLine.Command(name = "get", header = "%n@|green Retrieves a single job by job id.|@", sortOptions = false)
 public class JobGet extends AbstractDominoCommand {
 
     @ParentCommand
@@ -14,7 +14,7 @@ public class JobGet extends AbstractDominoCommand {
 
     private static final String NAME = "job get";
 
-    @CommandLine.Option(names = {"--jobId"}, description = "Job ID to get", required = true)
+    @CommandLine.Option(names = {"--jobId"}, description = "Job ID to get%n", required = true, order = -2)
     private String jobId;
 
     @Override
