@@ -1,12 +1,12 @@
 package com.ksm.domino.cli.command.project;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
-import com.dominodatalab.api.model.DominoCommonModelsEnvironmentVariables;
+import com.dominodatalab.api.model.DominoCommonModelsEnvironmentVariable;
 import com.dominodatalab.api.rest.ProjectsApi;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
-
 import picocli.CommandLine;
 import picocli.CommandLine.ParentCommand;
 
@@ -24,10 +24,8 @@ public class ProjectGetEnv extends AbstractDominoCommand {
     @Override
     public void execute() throws Exception {
         String projectId = getRequiredParam(parameters, "projectId", NAME);
-
         ProjectsApi projectsApi = new ProjectsApi(getApiClient(parent.domino));
-        DominoCommonModelsEnvironmentVariables result = projectsApi.listProjectEnvironmentVariables(projectId);
-
+        List<DominoCommonModelsEnvironmentVariable> result = projectsApi.getProjectEnvironmentVariables(projectId);
         output(result, parent.domino);
     }
 

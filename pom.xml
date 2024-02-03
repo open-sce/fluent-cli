@@ -8,9 +8,9 @@
     <description>Domino Data Lab Command Line Interface is a client used provision and control Domino.</description>
     <url>https://github.com/ksmpartners/domino-cli</url>
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <quarkus.platform.version>3.6.6</quarkus.platform.version>
+        <quarkus.platform.version>3.7.1</quarkus.platform.version>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
         <exec.mainClass>com.ksm.domino.cli.provider.Launcher</exec.mainClass>
@@ -77,7 +77,7 @@
         <dependency>
             <groupId>com.ksmpartners</groupId>
             <artifactId>quarkus-domino-client</artifactId>
-            <version>5.7.2</version>
+            <version>5.9.1.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

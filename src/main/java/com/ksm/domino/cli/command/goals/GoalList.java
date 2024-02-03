@@ -26,7 +26,7 @@ public class GoalList extends AbstractDominoCommand {
     public void execute() throws Exception {
         String projectId = getRequiredParam(parameters, "projectId", NAME);
         ProjectsApi projectsApi = new ProjectsApi(getApiClient(parent.domino));
-        List<DominoProjectsApiProjectGoal> project = projectsApi.getProjectGoals(projectId);
-        output(project, parent.domino);
+        List<DominoProjectsApiProjectGoal> goals = projectsApi.getProjectGoals(projectId);
+        output(goals, parent.domino);
     }
 }

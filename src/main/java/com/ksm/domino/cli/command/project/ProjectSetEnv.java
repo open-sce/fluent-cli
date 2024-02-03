@@ -1,6 +1,8 @@
 package com.ksm.domino.cli.command.project;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -22,32 +24,26 @@ public class ProjectSetEnv extends AbstractDominoCommand {
 
     @CommandLine.Parameters(description = "@|blue Required Parameters:%nprojectId=1234.....%nDynamic Variable Assignments:%nENV_NAME=env-value|@")
     private final Map<String, String> parameters = new LinkedHashMap<>();
-    private final DominoCommonModelsEnvironmentVariables variables = new DominoCommonModelsEnvironmentVariables();
 
     @Override
     public void execute() throws Exception {
         String projectId = getRequiredParam(parameters, "projectId", NAME);
         parameters.remove("projectId");
 
-        // Build list of envvars to set
-        parameters.entrySet().stream().forEach(this::addVarToList);
-
+        List<DominoCommonModelsEnvironmentVariable> results = new ArrayList<>();
         ProjectsApi projectsApi = new ProjectsApi(getApiClient(parent.domino));
-        DominoCommonModelsEnvironmentVariables result = projectsApi.setProjectEnvironmentVariables(projectId, variables);
 
-        output(result, parent.domino);
-    }
+        // iterator over all variables updating 1 at a time
+        for (Entry<String, String> param : parameters.entrySet()) {
+            final DominoCommonModelsEnvironmentVariable variableDefinition = new DominoCommonModelsEnvironmentVariable();
 
-    /**
-     * Creates a Domino environment variable from a parameter entry and adds it to the variables list
-     */
-    private void addVarToList(Entry<String, String> parameter) {
-        final DominoCommonModelsEnvironmentVariable variableDefinition = new DominoCommonModelsEnvironmentVariable();
+            variableDefinition.setName(param.getKey());
+            variableDefinition.setValue(param.getValue());
 
-        variableDefinition.setName(parameter.getKey());
-        variableDefinition.setValue(parameter.getValue());
+            DominoCommonModelsEnvironmentVariable envVar = projectsApi.upsertProjectEnvironmentVariable(projectId, variableDefinition);
+            results.add(envVar);
+        }
 
-        // Add new variable to variables list
-        variables.addVarsItem(variableDefinition);
+        output(results, parent.domino);
     }
 }

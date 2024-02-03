@@ -8,14 +8,17 @@
 Domino Data Lab Fluent CLI (Command Line Interface) is a client used provision and control Domino.
 
 # Features
+
+The Fluent CLI offers numerous features and advantages compared to the Domino-provided CLI, including, but not limited to:
+
 -   Ability to output results as plain text, JSON, or XML
--   Zero dependency native executable
--   Detailed context sensitive help for each command
+-   Zero dependency native executable (macOS, Windows, Linux)
+-   Detailed context-sensitive help for each command
 -   Easily [script and chain](https://raw.githubusercontent.com/open-sce/fluent-cli/main/demo/demo.sh) commands together in your favorite shell (Bash, PowerShell, etc)
 
 # Requirements
 
-To use this CLI you will need to download the binary for your operating system such as Windows, Linux, or MacOS.  We provide pre-built binaries that have no other requirements found
+To use this CLI you will need to download the binary for your operating system such as Windows, Linux, or macOS.  We provide pre-built binaries that have no other requirements found
 on our [Releases](https://github.com/open-sce/fluent-cli/releases) page.
 
 - Binary for your OS found here: https://github.com/open-sce/fluent-cli/releases
@@ -99,7 +102,7 @@ $ domino-cli -k YOUR_KEY -u https://domino.yourcompany.com/v4 user current
 
 # Build
 
-To build the project requires Apache Maven.  You can build as a JAR file which requires a JVM to run, or as a native executable which requires nothing else to run.
+Building the project necessitates Apache Maven. You have the option to assemble it as a JAR file, requiring a JVM for execution, or as a standalone executable, needing no additional dependencies to run.
 
 ## JVM Build
 
@@ -146,7 +149,7 @@ Once you have everything installed you can build a Windows native executable wit
 mvn clean package -Pnative
 ```
 
-You will find the fully portable executable in `/target/domino-cli-2.0.0.exe` which you can rename and move to any other windows machine.
+You will find the fully portable executable in `/target/domino-cli-2.0.0.exe` which you can rename and move to any other Windows machine.
 
 # Releasing
 
