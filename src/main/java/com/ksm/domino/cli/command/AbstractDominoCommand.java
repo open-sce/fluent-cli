@@ -1,6 +1,5 @@
 package com.ksm.domino.cli.command;
 
-import com.dominodatalab.api.invoker.ApiClient;
 import com.dominodatalab.api.invoker.ApiException;
 import com.dominodatalab.client.TrustAllManager;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -55,11 +54,11 @@ public abstract class AbstractDominoCommand implements Runnable {
     /**
      * Create the API Client for accessing Domino over HTTP.
      *
-     * @return the {@link ApiClient}
+     * @return the {@link com.dominodatalab.api.invoker.ApiClient}
      */
-    public ApiClient getApiClient(Domino domino) {
+    public com.dominodatalab.api.invoker.ApiClient getApiClient(Domino domino) {
         HttpClient.Builder httpClient = HttpClient.newBuilder().sslContext(TrustAllManager.createSslContext());
-        ApiClient client = new ApiClient();
+        com.dominodatalab.api.invoker.ApiClient client = new com.dominodatalab.api.invoker.ApiClient();
         client.setHttpClientBuilder(httpClient);
         client.setReadTimeout(Duration.ofSeconds(domino.timeoutSeconds));
         client.updateBaseUri(domino.apiUrl);
@@ -69,6 +68,22 @@ public abstract class AbstractDominoCommand implements Runnable {
         if (StringUtils.isBlank(basePath)) {
             client.setBasePath(DEFAULT_DOMINO_API_BASE_PATH);
         }
+        return client;
+    }
+
+    /**
+     * Create the API Client for accessing Domino over HTTP.
+     *
+     * @return the {@link com.dominodatalab.pub.invoker.ApiClient}
+     */
+    public com.dominodatalab.pub.invoker.ApiClient getPubClient(Domino domino) {
+        HttpClient.Builder httpClient = HttpClient.newBuilder().sslContext(TrustAllManager.createSslContext());
+        com.dominodatalab.pub.invoker.ApiClient client = new com.dominodatalab.pub.invoker.ApiClient();
+        client.setHttpClientBuilder(httpClient);
+        client.setReadTimeout(Duration.ofSeconds(domino.timeoutSeconds));
+        client.updateBaseUri(domino.apiUrl);
+        client.setRequestInterceptor(builder -> builder.setHeader("X-Domino-Api-Key", domino.apiKey));
+
         return client;
     }
 
