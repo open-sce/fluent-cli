@@ -5,9 +5,9 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.dominodatalab.api.model.DominoDatasetrwApiDatasetRwDto;
-import com.dominodatalab.api.model.DominoDatasetrwWebUpdateDatasetRequest;
-import com.dominodatalab.api.rest.DatasetRwApi;
+import com.dominodatalab.pub.model.DatasetRwEnvelopeV1;
+import com.dominodatalab.pub.model.DatasetRwMetadataV1;
+import com.dominodatalab.pub.rest.DatasetRwApi;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
 
 import picocli.CommandLine.Command;
@@ -36,14 +36,14 @@ public class DatasetRename extends AbstractDominoCommand {
 
         String datasetDescription = parameters.getOrDefault(PARAM_DATASET_DESCRIPTION, StringUtils.EMPTY);
 
-        DominoDatasetrwWebUpdateDatasetRequest request = new DominoDatasetrwWebUpdateDatasetRequest();
-        request.datasetName(datasetName);
+        DatasetRwMetadataV1 request = new DatasetRwMetadataV1();
+        request.name(datasetName);
         if (!StringUtils.isBlank(datasetDescription)) {
             request.description(datasetDescription);
         }
 
-        DatasetRwApi api = new DatasetRwApi(getApiClient(parent.domino));
-        DominoDatasetrwApiDatasetRwDto result = api.updateDataset(datasetId, request);
+        DatasetRwApi api = new DatasetRwApi(getPubClient(parent.domino));
+        DatasetRwEnvelopeV1 result = api.updateDataset(datasetId, request);
         output(result, parent.domino);
     }
 }
