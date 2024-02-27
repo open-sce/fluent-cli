@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.Validate;
 
 import com.dominodatalab.pub.model.CopyProjectSpecV1;
@@ -36,7 +37,7 @@ public class ProjectCopy extends AbstractDominoCommand {
     private static final String PARAM_REPO_OWNER = "repoOwner";
     private static final String PARAM_COPY_DATASETS = "copyDatasets";
 
-    @CommandLine.Parameters(description = "@|blue Required Parameters:%nname=projectName%nownerId=6125...%nprojectToCopyId=1235...%ncredentialId=6d321...%n%nOptional Parameters:%nimportedCredentialId=6e124...%nlinkRepoUrl=https://github.com/...%nrepoName=domino-project%nrepoOwner=user%ncopyDatasets|@")
+    @CommandLine.Parameters(description = "@|blue Required Parameters:%nname=projectName%nownerId=6125...%nprojectToCopyId=1235...%ncredentialId=6d321...%n%nOptional Parameters:%nimportedCredentialId=6e124...%nlinkRepoUrl=https://github.com/...%nrepoName=domino-project%nrepoOwner=user%ncopyDatasets=true|@")
     private final Map<String, String> parameters = new LinkedHashMap<>();
 
     @Override
@@ -46,7 +47,7 @@ public class ProjectCopy extends AbstractDominoCommand {
         String projectName = getRequiredParam(parameters, PARAM_NAME, NAME);
         String ownerId = getRequiredParam(parameters, PARAM_OWNER_ID, NAME);
         String credentialId = getRequiredParam(parameters, PARAM_CREDENTIAL_ID, NAME);
-        Boolean copyDatasets = parameters.containsKey(PARAM_COPY_DATASETS);
+        Boolean copyDatasets = BooleanUtils.toBoolean(parameters.getOrDefault(PARAM_COPY_DATASETS, "false"));
 
         String importedCredentialId = parameters.getOrDefault(PARAM_IMPORTED_CREDENTIAL_ID, credentialId);
 

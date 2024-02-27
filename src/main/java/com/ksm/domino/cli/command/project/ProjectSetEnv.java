@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.dominodatalab.api.model.DominoCommonModelsEnvironmentVariable;
-import com.dominodatalab.api.model.DominoCommonModelsEnvironmentVariables;
 import com.dominodatalab.api.rest.ProjectsApi;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
 
