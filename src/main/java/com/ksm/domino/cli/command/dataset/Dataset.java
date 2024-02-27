@@ -12,6 +12,7 @@ import picocli.CommandLine.ParentCommand;
         subcommands = {
                 DatasetCreate.class,
                 DatasetMount.class,
+                DatasetRename.class,
                 DatasetSnapshot.class,
                 DatasetUnmount.class
         })
