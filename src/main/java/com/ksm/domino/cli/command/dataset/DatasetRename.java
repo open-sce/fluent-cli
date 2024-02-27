@@ -17,7 +17,7 @@ public class DatasetRename extends AbstractDominoCommand {
     @ParentCommand
     private Dataset parent;
 
-    @CommandLine.Option(names = {"--datasetId"}, description = "ID of the dataset to update%n", required = true, order = -3)
+    @CommandLine.Option(names = {"--dataset-id"}, description = "ID of the dataset to update%n", required = true, order = -3)
     private String datasetId;
 
     @CommandLine.Option(names = {"--name"}, description = "New name of the dataset%n", required = true, order = -3)
