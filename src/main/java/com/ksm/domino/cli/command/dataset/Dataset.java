@@ -11,7 +11,9 @@ import picocli.CommandLine.ParentCommand;
         header = "%n@|green Dataset related functions|@",
         subcommands = {
                 DatasetCreate.class,
+                DatasetList.class,
                 DatasetMount.class,
+                DatasetRename.class,
                 DatasetSnapshot.class,
                 DatasetUnmount.class
         })

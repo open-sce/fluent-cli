@@ -1,24 +1,23 @@
 package com.ksm.domino.cli.command;
 
-import com.dominodatalab.api.invoker.ApiClient;
-import com.dominodatalab.api.invoker.ApiException;
-import com.dominodatalab.client.TrustAllManager;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import java.net.URI;
+import java.time.Duration;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.dominodatalab.client.DominoApiClient;
+import com.dominodatalab.client.DominoPublicClient;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.toml.TomlMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.ksm.domino.cli.Domino;
-import org.apache.commons.lang3.StringUtils;
-import picocli.CommandLine.Option;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.time.Duration;
-import java.util.Map;
+import picocli.CommandLine.Option;
 
 /**
  * Abstract base class that any command that needs to access Domino should extend.
@@ -43,7 +42,7 @@ public abstract class AbstractDominoCommand implements Runnable {
     public void run() {
         try {
             execute();
-        } catch (ApiException ex) {
+        } catch (com.dominodatalab.api.invoker.ApiException|com.dominodatalab.pub.invoker.ApiException ex) {
             throw new RuntimeException(ex.getMessage());
         } catch (IllegalArgumentException ex) {
             throw ex;
@@ -55,12 +54,10 @@ public abstract class AbstractDominoCommand implements Runnable {
     /**
      * Create the API Client for accessing Domino over HTTP.
      *
-     * @return the {@link ApiClient}
+     * @return the {@link com.dominodatalab.api.invoker.ApiClient}
      */
-    public ApiClient getApiClient(Domino domino) {
-        HttpClient.Builder httpClient = HttpClient.newBuilder().sslContext(TrustAllManager.createSslContext());
-        ApiClient client = new ApiClient();
-        client.setHttpClientBuilder(httpClient);
+    public com.dominodatalab.api.invoker.ApiClient getApiClient(Domino domino) {
+        com.dominodatalab.api.invoker.ApiClient client = DominoApiClient.createApiClient();
         client.setReadTimeout(Duration.ofSeconds(domino.timeoutSeconds));
         client.updateBaseUri(domino.apiUrl);
         client.setRequestInterceptor(builder -> builder.setHeader("X-Domino-Api-Key", domino.apiKey));
@@ -69,6 +66,19 @@ public abstract class AbstractDominoCommand implements Runnable {
         if (StringUtils.isBlank(basePath)) {
             client.setBasePath(DEFAULT_DOMINO_API_BASE_PATH);
         }
+        return client;
+    }
+
+    /**
+     * Create the API Client for accessing Domino over HTTP.
+     *
+     * @return the {@link com.dominodatalab.pub.invoker.ApiClient}
+     */
+    public com.dominodatalab.pub.invoker.ApiClient getPubClient(Domino domino) {
+        com.dominodatalab.pub.invoker.ApiClient client = DominoPublicClient.createApiClient();
+        client.setReadTimeout(Duration.ofSeconds(domino.timeoutSeconds));
+        client.updateBaseUri(domino.apiUrl);
+        client.setRequestInterceptor(builder -> builder.setHeader("X-Domino-Api-Key", domino.apiKey));
         return client;
     }
 
@@ -100,16 +110,12 @@ public abstract class AbstractDominoCommand implements Runnable {
             case JSON:
             default:
                 // default to JSON mapper
-                mapper = new ObjectMapper();
+                mapper = DominoApiClient.createDefaultObjectMapper();
                 break;
         }
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        mapper.configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false);
+        mapper.setSerializationInclusion(Include.NON_NULL);
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         mapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
-        mapper.enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING);
-        mapper.disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE);
         mapper.registerModule(new JavaTimeModule());
         String result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(o);
         System.out.println(result);
