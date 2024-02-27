@@ -9,10 +9,13 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import com.dominodatalab.client.DominoApiClient;
 import com.dominodatalab.client.DominoPublicClient;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.toml.TomlMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.ksm.domino.cli.Domino;
 
 import picocli.CommandLine.Option;
@@ -112,6 +115,11 @@ public abstract class AbstractDominoCommand implements Runnable {
                 mapper = DominoApiClient.createDefaultObjectMapper();
                 break;
         }
+        mapper.setSerializationInclusion(Include.NON_NULL);
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        mapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
+        JavaTimeModule module = new JavaTimeModule();
+        mapper.registerModule(module);
         String result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(o);
         System.out.println(result);
     }
