@@ -1,8 +1,5 @@
 package com.ksm.domino.cli.command.dataset;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.dominodatalab.pub.model.DatasetRwEnvelopeV1;
@@ -11,31 +8,26 @@ import com.dominodatalab.pub.rest.DatasetRwApi;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
 
 import picocli.CommandLine.Command;
-import picocli.CommandLine.Parameters;
+import picocli.CommandLine;
 import picocli.CommandLine.ParentCommand;
 
-@Command(name = "rename", header = "%n@|green Rename a dataset|@")
+@Command(name = "rename", header = "%n@|green Rename a dataset|@", sortOptions = false)
 public class DatasetRename extends AbstractDominoCommand {
 
     @ParentCommand
     private Dataset parent;
 
-    private static final String NAME = "dataset remame";
-    
-    private static final String PARAM_DATASET_ID = "datasetId";
-    private static final String PARAM_DATASET_NAME = "name";
-    private static final String PARAM_DATASET_DESCRIPTION = "description";
+    @CommandLine.Option(names = {"--datasetId"}, description = "ID of the dataset to update%n", required = true, order = -3)
+    private String datasetId;
 
-    @Parameters(description = "@|blue Required parameters:%n datasetId=123%n name=supplemental%n%nOptional Parameters:%ndescription=\"Extraneous Metadata\"%n|@%n", mapFallbackValue = "")
-    private final Map<String, String> parameters = new LinkedHashMap<>(2);
+    @CommandLine.Option(names = {"--name"}, description = "New name of the dataset%n", required = true, order = -3)
+    private String datasetName;
+
+    @CommandLine.Option(names = {"--description"}, description = "New description of the dataset%n", order = -2)
+    private String datasetDescription;
 
     @Override
     public void execute() throws Exception {
-        String datasetId = getRequiredParam(parameters, PARAM_DATASET_ID, NAME);
-        String datasetName = getRequiredParam(parameters, PARAM_DATASET_NAME, NAME);
-
-        String datasetDescription = parameters.getOrDefault(PARAM_DATASET_DESCRIPTION, StringUtils.EMPTY);
-
         DatasetRwMetadataV1 request = new DatasetRwMetadataV1();
         request.name(datasetName);
         if (!StringUtils.isBlank(datasetDescription)) {
