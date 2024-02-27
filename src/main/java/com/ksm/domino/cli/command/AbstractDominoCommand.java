@@ -5,7 +5,6 @@ import java.time.Duration;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import com.dominodatalab.client.DominoApiClient;
 import com.dominodatalab.client.DominoPublicClient;
@@ -44,7 +43,6 @@ public abstract class AbstractDominoCommand implements Runnable {
         try {
             execute();
         } catch (com.dominodatalab.api.invoker.ApiException|com.dominodatalab.pub.invoker.ApiException ex) {
-            ExceptionUtils.printRootCauseStackTrace(ex);
             throw new RuntimeException(ex.getMessage());
         } catch (IllegalArgumentException ex) {
             throw ex;
@@ -118,8 +116,7 @@ public abstract class AbstractDominoCommand implements Runnable {
         mapper.setSerializationInclusion(Include.NON_NULL);
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         mapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
-        JavaTimeModule module = new JavaTimeModule();
-        mapper.registerModule(module);
+        mapper.registerModule(new JavaTimeModule());
         String result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(o);
         System.out.println(result);
     }
