@@ -4,21 +4,20 @@
 [![Quarkus](https://img.shields.io/badge/quarkus-power-blue?logo=quarkus&style=for-the-badge)](https://github.com/quarkusio/quarkus)
 [![CI](https://img.shields.io/github/actions/workflow/status/open-sce/fluent-cli/build.yml?branch=main&logo=GitHub&style=for-the-badge)](https://github.com/open-sce/fluent-cli/actions/workflows/build.yml)
 
-
 Domino Data Lab Fluent CLI (Command Line Interface) is a client used provision and control Domino.
 
 # Features
 
 The Fluent CLI offers numerous features and advantages compared to the Domino-provided CLI, including, but not limited to:
 
--   Ability to output results as plain text, JSON, or XML
--   Zero dependency native executable (macOS, Windows, Linux)
--   Detailed context-sensitive help for each command
--   Easily [script and chain](https://raw.githubusercontent.com/open-sce/fluent-cli/main/demo/demo.sh) commands together in your favorite shell (Bash, PowerShell, etc)
+- Ability to output results as plain text, JSON, or XML
+- Zero dependency native executable (macOS, Windows, Linux)
+- Detailed context-sensitive help for each command
+- Easily [script and chain](https://raw.githubusercontent.com/open-sce/fluent-cli/main/demo/demo.sh) commands together in your favorite shell (Bash, PowerShell, etc)
 
 # Requirements
 
-To use this CLI you will need to download the binary for your operating system such as Windows, Linux, or macOS.  We provide pre-built binaries that have no other requirements found
+To use this CLI you will need to download the binary for your operating system such as Windows, Linux, or macOS. We provide pre-built binaries that have no other requirements found
 on our [Releases](https://github.com/open-sce/fluent-cli/releases) page.
 
 - Binary for your OS found here: https://github.com/open-sce/fluent-cli/releases
@@ -37,6 +36,7 @@ To add environment variables in Linux so that they are always available upon log
 1. Identify the shell you are using: Open a terminal and type `echo $SHELL`. This will display the path to the current shell binary.
 
 2. Open the shell configuration file: Use a text editor to open the configuration file for your shell. Here are some common configuration files for popular shells:
+
    - Bash: `~/.bashrc` or `~/.bash_profile`
    - Zsh: `~/.zshrc` or `~/.zprofile`
    - Fish: `~/.config/fish/config.fish`
@@ -70,22 +70,44 @@ To add your environment variables in Windows Powershell you can add them like th
 [Environment]::SetEnvironmentVariable("DOMINO_API_KEY", "your_api_key", "User")
 [Environment]::SetEnvironmentVariable("DOMINO_API_URL", "your_api_url", "User")
 ```
+
 Replace `"your_api_key"` and `"your_api_url"` with the actual values you want to assign to the environment variables.
 
+# Domino Workspace
+
+If you're operating within a Domino Workspace, accessing and utilizing the CLI requires minimal setup. Being within the workspace ensures that the CLI seamlessly integrates with your existing API_KEY and API_URL, eliminating the need for additional configuration. As a result, the CLI functions effortlessly right from the start.
+
+## Download
+
+Within your Domino Workspace, initiate a Terminal session and execute commands akin to the ones below to download and extract the CLI:
+
+```shell
+# Download the file
+$ wget https://github.com/open-sce/fluent-cli/releases/download/3.0.0/domino-cli-3.0.0-linux-x86_64.tar.gz
+
+# Unzip the downloaded file
+$ tar -xvf domino-cli-3.0.0-linux-x86_64.tar.gz
+
+# Move the unzipped cli to current directory
+$ mv domino-cli-3.0.0-linux-x86_64/bin/domino-cli .
+```
+
 # Test
+
 To test the CLI is working, run the following command to print out your current user information:
 
 ```shell
-$ domino-cli user current
+$ ./domino-cli user current
 ```
 
 If you are not using environment variables it would be:
 
 ```shell
-$ domino-cli -k YOUR_KEY -u https://domino.yourcompany.com/v4 user current
+$ ./domino-cli -k YOUR_KEY -u https://domino.yourcompany.com/v4 user current
 ```
 
 **Output:**
+
 ```json
 {
   "firstName": "Homer",
@@ -98,6 +120,7 @@ $ domino-cli -k YOUR_KEY -u https://domino.yourcompany.com/v4 user current
 ```
 
 # Help
+
 ![image](https://user-images.githubusercontent.com/4399574/155019857-986e31e4-abc0-4eda-9e96-3ed39c746119.png)
 
 # Build
@@ -155,7 +178,7 @@ You will find the fully portable executable in `/target/domino-cli-2.0.0.exe` wh
 
 - Click on GitHub Actions
 - Find the Release action and execute the action manually
-- It will ask for Release version and next SNAPSHOT version.  Simply fill out and it is all automated!
+- It will ask for Release version and next SNAPSHOT version. Simply fill out and it is all automated!
 
 # License
 
@@ -165,4 +188,4 @@ Licensed under the [GNU General Public License version 3](https://opensource.org
 
 # Copyright
 
-Domino and Domino Data Lab are © 2023 Domino Data Lab, Inc. Made in San Francisco. 
+Domino and Domino Data Lab are © 2023 Domino Data Lab, Inc. Made in San Francisco.
