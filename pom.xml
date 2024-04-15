@@ -58,7 +58,7 @@
     <properties>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <quarkus.platform.version>3.9.2</quarkus.platform.version>
+        <quarkus.platform.version>3.9.3</quarkus.platform.version>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
         <exec.mainClass>com.ksm.domino.cli.provider.Launcher</exec.mainClass>
