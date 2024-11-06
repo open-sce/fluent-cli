@@ -19,7 +19,7 @@ public class JobStop extends AbstractDominoCommand {
 
     private static final String NAME = "job stop";
 
-    @CommandLine.Parameters(description = "@|blue Parameters:%n projectId=12345%n jobId=456%n commitResults=true%n|@%n", mapFallbackValue = "")
+    @CommandLine.Parameters(description = "@|blue Parameters:%n jobId=456%n commitResults=true%n|@%n", mapFallbackValue = "")
     private final Map<String, String> parameters = new LinkedHashMap<>(6);
 
     @Override
@@ -33,9 +33,7 @@ public class JobStop extends AbstractDominoCommand {
     private DominoJobsWebJobStopOperationRequest createRequest() {
         DominoJobsWebJobStopOperationRequest request = new DominoJobsWebJobStopOperationRequest();
         // required
-        request.setProjectId(
-                    getRequiredParam(parameters, DominoJobsWebJobStopOperationRequest.JSON_PROPERTY_PROJECT_ID, NAME));
-        request.setProjectId(
+        request.setJobId(
                     getRequiredParam(parameters, DominoJobsWebJobStopOperationRequest.JSON_PROPERTY_JOB_ID, NAME));
         request.setCommitResults(Boolean.parseBoolean(
                     parameters.getOrDefault(DominoJobsWebJobStopOperationRequest.JSON_PROPERTY_COMMIT_RESULTS,

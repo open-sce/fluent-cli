@@ -11,7 +11,6 @@ import picocli.CommandLine.ParentCommand;
             header = "%n@|green Goal related functions|@",
             subcommands = {
                         GoalComplete.class,
-                        GoalList.class,
                         GoalLinkJob.class
             })
 public class Goal extends AbstractParentCommand {
