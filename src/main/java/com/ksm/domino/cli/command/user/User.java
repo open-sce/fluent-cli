@@ -17,7 +17,6 @@ import picocli.CommandLine.ParentCommand;
                 UserCredentialAdd.class,
                 UserCredentialDelete.class,
                 UserCredentialList.class,
-                UserProjectDependencyGraph.class
         })
 public class User extends AbstractParentCommand {
         @ParentCommand
