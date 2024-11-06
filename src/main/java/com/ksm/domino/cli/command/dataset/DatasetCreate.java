@@ -50,7 +50,7 @@ public class DatasetCreate extends AbstractDominoCommand {
             collaboratorIds.forEach(id -> {
                 DominoDatasetrwApiDatasetRwGrant grant = new DominoDatasetrwApiDatasetRwGrant();
                 grant.setTargetId(id);
-                grant.setTargetRole(TargetRoleEnum.DATASETRWEDITOR);
+            grant.setTargetRole(TargetRoleEnum.DATASET_RW_EDITOR);
                 grants.add(grant);
             });
         }

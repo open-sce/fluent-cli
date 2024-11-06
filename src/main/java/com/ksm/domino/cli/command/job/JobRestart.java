@@ -19,7 +19,7 @@ public class JobRestart extends AbstractDominoCommand {
 
     private static final String NAME = "job restart";
 
-    @CommandLine.Parameters(description = "@|blue Parameters:%n projectId=12345%n jobId=456%n shouldUseOriginalInputCommit=true%n|@%n", mapFallbackValue = "")
+    @CommandLine.Parameters(description = "@|blue Parameters:%n jobId=456%n shouldUseOriginalInputCommit=true%n|@%n", mapFallbackValue = "")
     private final Map<String, String> parameters = new LinkedHashMap<>(6);
 
     @Override
@@ -33,10 +33,7 @@ public class JobRestart extends AbstractDominoCommand {
     private DominoJobsWebJobRestartOperationRequest createRequest() {
         DominoJobsWebJobRestartOperationRequest request = new DominoJobsWebJobRestartOperationRequest();
         // required
-        request.setProjectId(
-                    getRequiredParam(parameters, DominoJobsWebJobRestartOperationRequest.JSON_PROPERTY_PROJECT_ID,
-                                NAME));
-        request.setProjectId(
+        request.setJobId(
                     getRequiredParam(parameters, DominoJobsWebJobRestartOperationRequest.JSON_PROPERTY_JOB_ID, NAME));
         request.setShouldUseOriginalInputCommit(Boolean.parseBoolean(
                     parameters.getOrDefault(

@@ -53,7 +53,7 @@ public class JobStart extends AbstractDominoCommand {
         request.setEnvironmentId(parameters.get(DominoJobsWebStartJobRequest.JSON_PROPERTY_ENVIRONMENT_ID));
         request.setOverrideHardwareTierId(
                     parameters.get(DominoJobsWebStartJobRequest.JSON_PROPERTY_OVERRIDE_HARDWARE_TIER_ID));
-        request.setEnvironmentRevisionSpec(new DominoComputeclusterApiDefaultComputeClusterSettingsComputeEnvironmentRevisionSpec("ActiveRevision"));
+        request.setEnvironmentRevisionSpec(new DominoJobsInterfaceComputeClusterConfigSpecDtoComputeEnvironmentRevisionSpec("ActiveRevision"));
 
         if (parameters.containsKey(MAIN_REPO_REF_TYPE) || parameters.containsKey(MAIN_REPO_REF_VALUE)) {
             DominoProjectsApiRepositoriesReferenceDTO mainRepoGitRef = new DominoProjectsApiRepositoriesReferenceDTO();
